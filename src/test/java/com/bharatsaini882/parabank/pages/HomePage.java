@@ -12,7 +12,7 @@ public class HomePage extends BasePage {
     private final By loginButton = By.xpath("//input[@value='Log In']");
     private final By registerLink = By.linkText("Register");
     private final By customerLoginHeading = By.xpath("//h2[text()='Customer Login']");
-
+    private final By openNewAccountLink = By.linkText("Open New Account");
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -39,6 +39,10 @@ public class HomePage extends BasePage {
 
     public void clickRegister(){
         driver.findElement(registerLink).click();
+    }
+
+    public void clickOpenNewAccount(){
+        driver.findElement((openNewAccountLink)).click();
     }
 
 }
