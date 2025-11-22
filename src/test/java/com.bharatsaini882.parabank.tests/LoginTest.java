@@ -14,8 +14,8 @@ public class LoginTest extends BaseTest {
 
         LoginPage loginPage = new LoginPage(driver);
 
-        String invalidUsername = "invalidUser123";
-        String invalidPassword = "wrongPassword!";
+        String invalidUsername = "invalidUser1231";
+        String invalidPassword = "wrongPassword!!";
 
         loginPage.login(invalidUsername,invalidPassword);
 

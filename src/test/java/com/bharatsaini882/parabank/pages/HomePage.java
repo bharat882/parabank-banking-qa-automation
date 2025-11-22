@@ -13,6 +13,8 @@ public class HomePage extends BasePage {
     private final By registerLink = By.linkText("Register");
     private final By customerLoginHeading = By.xpath("//h2[text()='Customer Login']");
     private final By openNewAccountLink = By.linkText("Open New Account");
+    private final By welcomeMessage = By.xpath("//p[contains(text(),'Your account was created successfully. You are now logged in.')]");
+    private final By accountsOverviewLink = By.xpath("//a[text()='Accounts Overview']\n");
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -45,4 +47,11 @@ public class HomePage extends BasePage {
         driver.findElement((openNewAccountLink)).click();
     }
 
+    public boolean isWelcomeMessageDisplayed(){
+        return waitForVisible(welcomeMessage).isDisplayed();
+    }
+
+    public void clickAccountsOverview(){
+        driver.findElement(accountsOverviewLink).click();
+    }
 }

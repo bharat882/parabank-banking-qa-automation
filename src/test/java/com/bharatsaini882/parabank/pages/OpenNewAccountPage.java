@@ -24,6 +24,7 @@ public class OpenNewAccountPage extends BasePage {
 
     public void selectFromAccountByIndex(int index){
         Select select = new Select((waitForVisible(fromAccountDropdown)));
+        wait.until(driver -> select.getOptions().size()>0);
         select.selectByIndex(index);
     }
 

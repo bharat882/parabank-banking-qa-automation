@@ -10,7 +10,7 @@
         </groups>
         <classes>
             <class name="com.bharatsaini882.parabank.tests.SanityTest"/>
-            <class name="com.bharatsaini882.parabank.tests.HomePageTest"/>
+           <class name="com.bharatsaini882.parabank.tests.HomePageTest"/>
             <class name="com.bharatsaini882.parabank.tests.LoginTest"/>
             <class name="com.bharatsaini882.parabank.tests.RegisterPageTest"/>
             <class name="com.bharatsaini882.parabank.tests.OpenNewAccountTest"/>

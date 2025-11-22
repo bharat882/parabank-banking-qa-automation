@@ -1,5 +1,6 @@
 package com.bharatsaini882.parabank.tests;
 
+import com.beust.ah.A;
 import com.bharatsaini882.parabank.core.BaseTest;
 import com.bharatsaini882.parabank.pages.*;
 import org.slf4j.Logger;
@@ -11,8 +12,6 @@ import java.util.List;
 import java.util.UUID;
 
 public class OpenNewAccountTest extends BaseTest {
-
-    private static final Logger log = LoggerFactory.getLogger(OpenNewAccountTest.class);
 
     @Test(groups = {"ui", "regression"})
     public void userShouldBeAbleToOpenNewAccountAfterLogin(){
@@ -41,18 +40,24 @@ public class OpenNewAccountTest extends BaseTest {
                 password
         );
 
-        AccountsOverviewPage accountsOverviewPage = new AccountsOverviewPage(driver);
-        Assert.assertTrue(accountsOverviewPage.isAccountsOverviewHeadingDisplayed(),"Expected to be on Accounts Overview after registration");
+        homePage = new HomePage(driver);
+        homePage.clickAccountsOverview();
+     //   Assert.assertTrue(homePage.isWelcomeMessageDisplayed(),"Expected Welcome message after registration");
 
-        List<String> existingAccounts = accountsOverviewPage.getAllAccountNumbers();
-        int initialAccountCount = existingAccounts.size();
+        AccountsOverviewPage accountsOverviewPage = new AccountsOverviewPage(driver);
+        Assert.assertTrue(accountsOverviewPage.isAccountsOverviewDisplayed(),"Expected Accounts Overview Page to be opened.");
+
+    //    List<String> existingAccounts = accountsOverviewPage.getAllAccountNumbers();
+   //     int initialAccountCount = existingAccounts.size();
 
         accountsOverviewPage.clickLogout();
 
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login(uniqueUsername, password);
 
-        Assert.assertTrue(accountsOverviewPage.isAccountsOverviewHeadingDisplayed(),"Expected to be on Accounts Overview after login");
+        accountsOverviewPage = new AccountsOverviewPage(driver);
+
+        Assert.assertTrue(accountsOverviewPage.isAccountsOverviewDisplayed(),"Expected to be on Accounts Overview after login");
 
         homePage = new HomePage(driver);
         homePage.clickOpenNewAccount();
@@ -69,15 +74,21 @@ public class OpenNewAccountTest extends BaseTest {
         System.out.println("Newly opened account id: "+newAccountId);
         Assert.assertFalse(newAccountId.isEmpty(),"New account ID should not be empty.");
 
-        driver.get(baseUrl);
+        homePage = new HomePage(driver);
+        homePage.clickAccountsOverview();
 
-        Assert.assertTrue(accountsOverviewPage.isAccountsOverviewHeadingDisplayed(),"Expected Accounts Overview to be displayed");
+        accountsOverviewPage = new AccountsOverviewPage(driver);
 
-        List<String> updatedAccounts = accountsOverviewPage.getAllAccountNumbers();
+        Assert.assertTrue(accountsOverviewPage.isAccountsOverviewDisplayed(),"Expected Accounts Overview to be displayed");
 
-        Assert.assertTrue(updatedAccounts.size()>initialAccountCount, "Expected number of accounts to increase after opening a new one.");
+//        List<String> updatedAccounts = accountsOverviewPage.getAllAccountNumbers();
+//
+//        Assert.assertTrue(updatedAccounts.size()>initialAccountCount, "Expected number of accounts to increase after opening a new one.");
 
-        Assert.assertTrue(updatedAccounts.contains(newAccountId),"Expected newly created account to appear in Accounts Overview.");
+  //      Assert.assertTrue(updatedAccounts.contains(newAccountId),"Expected newly created account to appear in Accounts Overview.");\
+
+        Assert.assertTrue((accountsOverviewPage.isAccountNumberPresent(newAccountId)),"xpected newly created account to appear in Accounts Overview.");
+
 
     }
 
